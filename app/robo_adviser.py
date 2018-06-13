@@ -64,7 +64,7 @@ def format_date_time(date_time):
 
 def latest_closing_price(latest_prices):
     closing_price = float(latest_prices["close"])
-    closing_price_formatted = '{:.2f}'.format(round(closing_price, 2))
+    closing_price_formatted = round(closing_price, 2)
     return closing_price_formatted
 
 def recent_high_price(prices_data):
@@ -74,7 +74,7 @@ def recent_high_price(prices_data):
         high_prices.append(high_price)
 
     max_price = max(high_prices)
-    max_price_formatted = '{:.2f}'.format(round(max_price, 2))
+    max_price_formatted = round(max_price, 2)
     return max_price_formatted
 
 def recent_low_price(prices_data):
@@ -84,11 +84,11 @@ def recent_low_price(prices_data):
         low_prices.append(low_price)
 
     min_price = min(low_prices)
-    min_price_formatted = '{:.2f}'.format(round(min_price, 2))
+    min_price_formatted = round(min_price, 2)
     return min_price_formatted
 
 def stock_recommendation(latest_closing_price, recent_low_price):
-    price_diff = float(latest_closing_price)/float(recent_low_price)
+    price_diff = latest_closing_price/recent_low_price
     if price_diff > 1.2:
         return "BUY"
     else:
@@ -134,9 +134,9 @@ run_at_date = format_date(current_datetime)
 print(f"STOCK: {symbol}")
 print(f"RUN AT: {run_at_time} ON {run_at_date}")
 print(f"LATEST DATA FROM: {last_refreshed}")
-print(f"LATEST DAILY CLOSING PRICE FOR {symbol} IS: ${latest_price_usd}")
-print(f"RECENT AVERAGE HIGH PRICE FOR {symbol} IS: ${recent_high_price_usd}")
-print(f"RECENT AVERAGE LOW PRICE FOR {symbol} IS: ${recent_low_price_usd}")
+print(f"LATEST DAILY CLOSING PRICE FOR {symbol} IS: ${'{:,.2f}'.format(latest_price_usd)}")
+print(f"RECENT AVERAGE HIGH PRICE FOR {symbol} IS: ${'{:,.2f}'.format(recent_high_price_usd)}")
+print(f"RECENT AVERAGE LOW PRICE FOR {symbol} IS: ${'{:,.2f}'.format(recent_low_price_usd)}")
 
 # Final Recommendation
 recommendation = stock_recommendation(latest_price_usd, recent_low_price_usd)
